@@ -23,9 +23,7 @@ namespace MongoDB.GenericRepository.Context
 
             // Every command will be stored and it'll be processed at SaveChanges
             _commands = new List<Func<Task>>();
-        }
-
-        
+        }        
 
         public async Task<int> SaveChanges()
         {
@@ -64,6 +62,11 @@ namespace MongoDB.GenericRepository.Context
         }
 
         public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        protected virtual void Dispose(bool isDisposing)
         {
             Session?.Dispose();
             GC.SuppressFinalize(this);
